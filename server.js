@@ -7,8 +7,7 @@ const posts = new enmap({
 })
 const accounts = new enmap({
   name: "accounts",
-  fetchAll:true,
-  dataDir:"./.data"
+  fetchAll:true
 })
 const communities = new enmap({
   name: "community",
