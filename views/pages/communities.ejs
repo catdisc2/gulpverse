@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <%- include('../includes/head'); %>
+  <body>
+    <%- include('../includes/navbar'); %>
+    <%- include('../includes/navbar2'); %>
+    <br/>
+    <div style="width:auto;height:100%;margin-left:7em;margin-right:1.2em;">
+      <button id="bruh" onclick="req()" style="position:relative;top:-0.5em;width:8rem;height:2.5rem;border:none;border-radius:5px;box-shadow: 0 0px 10px rgb(0 0 0 / 20%);border:solid;border-color:darkgrey;border-top:0;border-right:0;border-left:0;background-color:#fcfcfc;">
+          Create
+        <div style="float:left;">
+          
+        </div>
+        </button>
+      <div style="background-color:#7de228;width:100%;height:2em;border-radius:5px;text-align:left;vertical-align:center;color:white;">
+        <a style="position:relative;left:1em;">Communities</a><br/>
+      </div>
+      <div style="width;auto;height:100%;position:relative;top:1em;display:grid;grid-auto-rows:min-content;">
+        <div style="display:flex;flex-wrap:wrap;width:100%;">
+        <% comm.forEach((commk) => { %>
+          
+          <a href="/community/<%= commk.name %>"><div style="width:50%;height:3.5em;display:flex;gap:10px;">
+            <img src="https://yt3.ggpht.com/a/AGF-l79PIIFdSAOdZKLQAzv1t78AAjU6B-ej1tIHaQ=s900-c-k-c0xffffffff-no-rj-mo" style="height:3.5em;border-radius:10px;box-shadow: 0 0px 5px rgb(0 0 0 / 1);">
+              <a style="position:relative;top:12px;" href="/community/<%= commk.name %>"><%= commk.name %></a>
+          </div></a>
+        <% }) %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

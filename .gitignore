@@ -1,0 +1,8 @@
+.glitchdotcom.json
+.node-gyp
+node_modules
+.data
+enmap.sqlite
+enmap.sqlite-shm
+enmap.sqlite-wal
+data
