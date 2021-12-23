@@ -82,7 +82,7 @@
       }
       const req = function(type, post) {
         if(type === "post") {
-          fetch("https://gulpverse.glitch.me/api/post", {
+          fetch("https://gulpverse.herokuapp.com/api/post", {
             method: "post",
             headers: {
               'Accept': 'application/json',
@@ -100,7 +100,7 @@
             alert("Something went wrong when trying to post")
           })
         } else if(type === "yeah") {
-          fetch("https://gulpverse.glitch.me/api/yeah", {
+          fetch("https://gulpverse.herokuapp.com/api/yeah", {
             method: "post",
             headers: {
               'Accept': 'application/json',

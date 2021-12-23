@@ -92,7 +92,7 @@
       }
       const req = function(type, post) {
         if(type === "post") {
-          fetch("https://gulpverse.glitch.me/api/posts/<%= key %>/post", {
+          fetch("https://gulpverse.herokuapp.com/api/posts/<%= key %>/post", {
             method: "post",
             headers: {
               'Accept': 'application/json',
@@ -101,24 +101,6 @@
             body: JSON.stringify({
               content: document.getElementById("lol").value,
               user: "<%= user %>"
-            })
-          }).then((response) => {
-            return response.json()
-          }).then((data) => {
-            if(!data.yass === "yass") alert("Something went wrong when trying to post")
-          }).catch((err) => {
-            alert("Something went wrong when trying to post")
-          })
-        } else if(type === "yeah") {
-          fetch("https://gulpverse.glitch.me/api/yeah", {
-            method: "post",
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              user: "<%= user %>",
-              id: <%= key %>
             })
           }).then((response) => {
             return response.json()
