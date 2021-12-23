@@ -156,7 +156,7 @@ app.post('/api/register', (req, res) => {
     }
   }
 })
-app.post('/api/post', limiter, (req, res) => {
+app.post('/api/post', (req, res) => {
   if(req.body.user && req.body.content) {
       posts.set("_" + posts.autonum, {
         poster: req.body.user,
@@ -175,7 +175,7 @@ app.post('/api/post', limiter, (req, res) => {
     res.send('no bye')
   }
 })
-app.post('/api/community/create', limiter, (req, res) => {
+app.post('/api/community/create', (req, res) => {
   if(req.body.name && req.body.icon) {
     if(communities.get(req.body.name)) {
       res.render('pagse/error', {error:"A community with that name already exists!"})
