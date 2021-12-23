@@ -130,8 +130,8 @@ app.post('/api/register', (req, res) => {
       if(accounts.get(req.body.user)) {
         res.render("pages/error", {error:"That username already exists"})
       } else {
-        if(!req.body.user.match(/^[0-9a-zA-Z]+$/)) {
-          res.render("pages/error", {error:"Only numbers and letts for usernames!"})
+        if(!req.body.user.match(/^[0-9a-zA-Z]+$/) || !req.body.user.length == 12) {
+          res.render("pages/error", {error:"Only numbers and letters for usernames! (and 12 chars)"})
         } else {
           accounts.set(req.body.user, {
             password: bcrypt.hash(req.body.pass, 10),
