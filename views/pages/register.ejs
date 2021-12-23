@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <%- include('../includes/head'); %>
-  <body>
-    <%- include('../includes/navbar'); %>
-    <%- include('../includes/navbar2'); %>
-    <% if(!login) { %>
-      <center>
-        <form action="/api/register" method="post">
-          <label><b>Username</b></label><br/>
-          <input type="text" placeholder="Username *" name="user" required><br/><br/>
-          <label><b>Password</b></label><br/>
-          <input type="password" placeholder="Password *" name="pass" required><br/><br/>
-          <button type="submit" style="position:static;width:8rem;height:2.5rem;border:none;border-radius:5px;box-shadow: 0 0px 10px rgb(0 0 0 / 20%);border:solid;border-color:darkgrey;border-top:0;border-right:0;border-left:0;background-color:#fcfcfc;">
-            Register
-          </button>
-        </form>
-        <a href="/login"><i>Have a account?</i></a><br/>
-        <a style="color:red"><b>* Only numbers and letters will work</b></a>
-      </center>
-    <% } else { %>
-      <h1>
-        Your already logged in!
-      </h1>
-    <% } %>
-  </body>
+<%- include('../includes/head'); %>
+
+<body>
+  <%- include('../includes/navbar'); %>
+  <%- include('../includes/navbar2'); %>
+  <% if(!login) { %>
+  <center>
+    <form action="/api/register" method="post">
+      <label><b>Username</b></label><br />
+      <input type="text" placeholder="Username *" name="user" required><br /><br />
+      <label><b>Password</b></label><br />
+      <input type="password" placeholder="Password *" name="pass" required><br /><br />
+      <button type="submit" style="position:static;width:8rem;height:2.5rem;border:none;border-radius:5px;box-shadow: 0 0px 10px rgb(0 0 0 / 20%);border:solid;border-color:darkgrey;border-top:0;border-right:0;border-left:0;background-color:#fcfcfc;">
+        Register
+      </button>
+    </form>
+    <a href="/login"><i>Have a account?</i></a><br />
+    <a style="color:red"><b>* Only numbers and letters will work</b></a>
+  </center>
+  <% } else { %>
+  <h1>
+    Your already logged in!
+  </h1>
+  <% } %>
+</body>
+
 </html>

@@ -1,131 +1,141 @@
 <!DOCTYPE html>
 <html>
-  <%- include('../includes/head'); %>
-  <body>
-    <%- include('../includes/navbar'); %>
-    <%- include('../includes/navbar2'); %>
-    <br/>
-    <center>
-      <table style="width:100%;margin-left:130px;height:100%;">
-        <tr>
-          <th style="width:50%;position:absolute;top:-1;">
-            <div id="drop" style="border-radius:10px;box-shadow: 0 0px 5px rgb(0 0 0 / 50%);overflow:hidden;text-align:left;background:linear-gradient(to bottom, rgba(0,0,0,0.05), white 11em);width:70%;height:13em; transition:height 1s;">
-              <div style="width:100%;height:3em;border-radius:10px;background-color:white;display:flex;border-bottom:solid 2px rgba(0,0,0,0.2);">
-                <i class="fas fa-question" style="font-size:2em;position:relative;top:0.3em;margin-left:0.2em;"></i>
-                <a style="Font-weight:normal;margin-top:0.8em;margin-left:1em;">Random</a>
-                <div style="position:relative;float:right;background:linear-gradient(to bottom, #fefefe, #dadada 155px);border-radius:7px;font-weight:normal;display:flex;border:solid 2px rgba(0, 0, 0, 0.3);border-bottom:solid 3px rgba(0, 0, 0, 0.5);border-top:0;width:2em;height:2em;gap:7px;margin-top:6px;margin-left:5px;justify-content:center" onclick="dropdown()"><i class="fas fa-caret-down" style="position:relative;top:3px;left:1px;font-size:1.5em;color:#7be026;"></i></div>
-              </div>
-              <a id="droptext" style="font-size:0.8em;font-weight:normal;font-wrap:wrap;">
-                Anything can be talked about, anything is allowed.
-              </a><br/>
-            </div><br/>
-            <div style="position:relative;top:0;width:70%;">
-      <div style="background-color:transparent;width:100%;height:3em;">
-        <div style="float:left;display:flex;gap:10px;">
-          <img src="https://cdn.picrew.me/app/image_maker/1388625/icon_8v9i99lsyve3qQWO.jpg" style="width:100%;height:3em;border-radius:5px;outline:solid lightgrey;">
-          <a><%= user %></a>
-        </div>
-      </div>
-      <textarea placeholder="Tap here to make a post." style="position:relative;top:1em;background-color:#fefefe;resize:none;width:100%;height:7.5em;border:none;border-radius:10px;outline:solid lightgrey 3px;" id="lol" oninput="check()"></textarea>
-        <center><button id="bruh" onclick="req('post')" style="position:relative;top:1em;width:8rem;height:2.5rem;border:none;border-radius:5px;box-shadow: 0 0px 10px rgb(0 0 0 / 20%);border:solid;border-color:darkgrey;border-top:0;border-right:0;border-left:0;background-color:#fcfcfc;">
-          Post
-        </button></center>
-      </div>
-    </div><br/><br/></th>
-      <th style="width:50%;" id="fu"><div style="display:flex;flex-direction: column-reverse;"> <% new Map(Array.from(posts).reverse()).forEach(function(lol, key) { %>
-      <div style="box-shadow: 0 0px 5px rgb(0 0 0 / 50%);background-color:white;border-radius:10px;position:relative;width:70%;" id="haha-2">
-        <div style="background-color:transparent;width:100%;height:3em;padding-top:1em;border-radius:15px;">
-          <div style="float:left;position:relative;left:1em;display:flex;gap:10px;">
-            <img src="https://cdn.picrew.me/app/image_maker/1388625/icon_8v9i99lsyve3qQWO.jpg" style="width:3.2em;height:3em;border-radius:5px;box-shadow: 0 5px 5px rgb(0 0 0 / 80%);">
-            <div style="display:block;text-align:left;">
-              <a <% if(lol.poster !== "Guest") { %>href="/users/<%= lol.poster %><% } %>"><%= lol.poster %></a><br/>
-              <a style="font-weight: normal;font-size:0.8em;opacity:30%;"><%= lol.time.toDateString() %></a>
+<%- include('../includes/head'); %>
+
+<body>
+  <%- include('../includes/navbar'); %>
+  <%- include('../includes/navbar2'); %>
+  <br />
+  <center>
+    <table style="width:100%;margin-left:130px;height:100%;">
+      <tr>
+        <th style="width:50%;position:absolute;top:-1;">
+          <div id="drop" style="border-radius:10px;box-shadow: 0 0px 5px rgb(0 0 0 / 50%);overflow:hidden;text-align:left;background:linear-gradient(to bottom, rgba(0,0,0,0.05), white 11em);width:70%;height:13em; transition:height 1s;">
+            <div style="width:100%;height:3em;border-radius:10px;background-color:white;display:flex;border-bottom:solid 2px rgba(0,0,0,0.2);">
+              <i class="fas fa-question" style="font-size:2em;position:relative;top:0.3em;margin-left:0.2em;"></i>
+              <a style="Font-weight:normal;margin-top:0.8em;margin-left:1em;">Random</a>
+              <div style="position:relative;float:right;background:linear-gradient(to bottom, #fefefe, #dadada 155px);border-radius:7px;font-weight:normal;display:flex;border:solid 2px rgba(0, 0, 0, 0.3);border-bottom:solid 3px rgba(0, 0, 0, 0.5);border-top:0;width:2em;height:2em;gap:7px;margin-top:6px;margin-left:5px;justify-content:center" onclick="dropdown()"><i class="fas fa-caret-down" style="position:relative;top:3px;left:1px;font-size:1.5em;color:#7be026;"></i></div>
             </div>
+            <a id="droptext" style="font-size:0.8em;font-weight:normal;">
+              Anything can be talked about, anything is allowed.
+            </a><br />
+          </div><br />
+          <div style="position:relative;top:0;width:70%;">
+            <div style="background-color:transparent;width:100%;height:3em;">
+              <div style="float:left;display:flex;gap:10px;">
+                <img src="https://cdn.picrew.me/app/image_maker/1388625/icon_8v9i99lsyve3qQWO.jpg" style="width:100%;height:3em;border-radius:5px;outline:solid lightgrey;">
+                <a><%= user %></a>
+              </div>
+            </div>
+            <textarea placeholder="Tap here to make a post." style="position:relative;top:1em;background-color:#fefefe;resize:none;width:100%;height:7.5em;border:none;border-radius:10px;outline:solid lightgrey 3px;" id="lol" oninput="check()"></textarea>
+            <center><button id="bruh" onclick="req('post')" style="position:relative;top:1em;width:8rem;height:2.5rem;border:none;border-radius:5px;box-shadow: 0 0px 10px rgb(0 0 0 / 20%);border:solid;border-color:darkgrey;border-top:0;border-right:0;border-left:0;background-color:#fcfcfc;">
+                Post
+              </button></center>
           </div>
-        </div>
-        
-        <textarea style="display:block;position:relative;left:1em;top:1em;resize:none;width:95%;height:5em;border:none;border-radius:10px;text-align:left;" id="lol" readonly><%= lol.content %></textarea><br/>
-        <div style="display:flex;gap:1em;">
-          <div style="position:relative;left:0;background:linear-gradient(to bottom, #fefefe, #dadada 155px);border-radius:7px;left:1em;font-weight:normal;display:flex;border:solid 2px rgba(0, 0, 0, 0.3);border-bottom:solid 3px rgba(0, 0, 0, 0.5);border-top:0;width:5.5em;height:2em;gap:7px;justify-content:center" onclick="req('yeah', '<%= key %>')"><i class="fa fa-plus" style="position:relative;top:3px;left:1px;font-size:1.5em;color:#7be026;"></i>Yeah!?</div>
-          <a href="/posts/<%= key %>"><div style="position:relative;right:0;background:linear-gradient(to bottom, #fefefe, #dadada 155px);border-radius:7px;left:1em;font-weight:normal;display:flex;border:solid 2px rgba(0, 0, 0, 0.3);border-bottom:solid 3px rgba(0, 0, 0, 0.5);border-top:0;width:5.5em;height:2em;gap:7px;justify-content:center"><i class="far fa-comment-alt" style="position:relative;top:3px;left:1px;font-size:1.5em;color:#7be026;"></i>Reply</div></a>
-          <a style="font-size:0.6em;position:relative;left:1em;top:1em;" id="<%= key %>_yeah"><%= lol.yeah %> Yeahs</a>
-        </div>
-        <div style="height:1em;"></div>
-        </div>
-        
-      </div><br/><br/>
-        <% }) %></div></th>
-        </tr>
-      </table>
-    </center>
-    <style>
-      ::placeholder {
-        opacity:30%;
+          </div><br /><br />
+        </th>
+        <th style="width:50%;" id="fu">
+          <div style="display:flex;flex-direction: column-reverse;"> <% new Map(Array.from(posts).reverse()).forEach(function(lol, key) { %>
+            <div style="box-shadow: 0 0px 5px rgb(0 0 0 / 50%);background-color:white;border-radius:10px;position:relative;width:70%;" id="haha-2">
+              <div style="background-color:transparent;width:100%;height:3em;padding-top:1em;border-radius:15px;">
+                <div style="float:left;position:relative;left:1em;display:flex;gap:10px;">
+                  <img src="https://cdn.picrew.me/app/image_maker/1388625/icon_8v9i99lsyve3qQWO.jpg" style="width:3.2em;height:3em;border-radius:5px;box-shadow: 0 5px 5px rgb(0 0 0 / 80%);">
+                  <div style="display:block;text-align:left;">
+                    <a <% if(lol.poster !== "Guest") { %>href="/users/<%= lol.poster %><% } %>"><%= lol.poster %></a><br />
+                    <a style="font-weight: normal;font-size:0.8em;opacity:30%;"><%= lol.time.toDateString() %></a>
+                  </div>
+                </div>
+              </div>
+
+              <textarea style="display:block;position:relative;left:1em;top:1em;resize:none;width:95%;height:5em;border:none;border-radius:10px;text-align:left;" id="lol" readonly><%= lol.content %></textarea><br />
+              <div style="display:flex;gap:1em;">
+                <div style="position:relative;left:0;background:linear-gradient(to bottom, #fefefe, #dadada 155px);border-radius:7px;left:1em;font-weight:normal;display:flex;border:solid 2px rgba(0, 0, 0, 0.3);border-bottom:solid 3px rgba(0, 0, 0, 0.5);border-top:0;width:5.5em;height:2em;gap:7px;justify-content:center" onclick="req('yeah', '<%= key %>')"><i class="fa fa-plus" style="position:relative;top:3px;left:1px;font-size:1.5em;color:#7be026;"></i>Yeah!?</div>
+                <a href="/posts/<%= key %>">
+                  <div style="position:relative;right:0;background:linear-gradient(to bottom, #fefefe, #dadada 155px);border-radius:7px;left:1em;font-weight:normal;display:flex;border:solid 2px rgba(0, 0, 0, 0.3);border-bottom:solid 3px rgba(0, 0, 0, 0.5);border-top:0;width:5.5em;height:2em;gap:7px;justify-content:center"><i class="far fa-comment-alt" style="position:relative;top:3px;left:1px;font-size:1.5em;color:#7be026;"></i>Reply</div>
+                </a>
+                <a style="font-size:0.6em;position:relative;left:1em;top:1em;" id="<%= key %>_yeah"><%= lol.yeah %> Yeahs</a>
+              </div>
+              <div style="height:1em;"></div>
+            </div>
+
+          </div><br /><br />
+          <% }) %></div>
+        </th>
+      </tr>
+    </table>
+  </center>
+  <style>
+    ::placeholder {
+      opacity: 30%;
+    }
+
+    #bruh {
+      z-index: 10;
+      display: block;
+    }
+
+    #bruh:hover {
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.07), #fefefe);
+      border-top: solid;
+    }
+  </style>
+  <script src="https://cdn.socket.io/4.4.0/socket.io.min.js"></script>
+  <script>
+    const check = function() {
+      var _0x6a5f = ["\x6C\x6F\x63\x61\x6C\x53\x74\x6F\x72\x61\x67\x65", "\x72\x61\x64", "\x79\x61\x73\x73", "\x73\x65\x74\x49\x74\x65\x6D"];
+      const lol = window[_0x6a5f[0]];
+      localStorage[_0x6a5f[3]](_0x6a5f[1], _0x6a5f[2])
+      var _0x93dc = ["\x76\x61\x6C\x75\x65", "\x6C\x6F\x6C", "\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64", "\x4E\x49\x4E\x4A\x41\x49\x53\x47\x4F\x44", "\x72\x65\x6C\x6F\x61\x64"];
+      if (document[_0x93dc[2]](_0x93dc[1])[_0x93dc[0]] == _0x93dc[3]) {
+        location[_0x93dc[4]]()
       }
-      #bruh {
-        z-index: 10;
-        display:block;
-      }
-      #bruh:active {
-        
-      }
-      #bruh:hover {
-        background:linear-gradient(to bottom,rgba(0,0,0,0.07),#fefefe);
-        border-top:solid;
-      }
-    </style>
-    <script src="https://cdn.socket.io/4.4.0/socket.io.min.js"></script>
-    <script>
-      const check = function() {
-        var _0x6a5f=["\x6C\x6F\x63\x61\x6C\x53\x74\x6F\x72\x61\x67\x65","\x72\x61\x64","\x79\x61\x73\x73","\x73\x65\x74\x49\x74\x65\x6D"];const lol=window[_0x6a5f[0]];localStorage[_0x6a5f[3]](_0x6a5f[1],_0x6a5f[2])
-        var _0x93dc=["\x76\x61\x6C\x75\x65","\x6C\x6F\x6C","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64","\x4E\x49\x4E\x4A\x41\x49\x53\x47\x4F\x44","\x72\x65\x6C\x6F\x61\x64"];if(document[_0x93dc[2]](_0x93dc[1])[_0x93dc[0]]== _0x93dc[3]){location[_0x93dc[4]]()}
-      }
-      const req = function(type, post) {
-        if(type === "post") {
-          fetch("https://gulpverse.herokuapp.com/api/post", {
-            method: "post",
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              content: document.getElementById("lol").value,
-              user: "<%= user %>"
-            })
-          }).then((response) => {
-            return response.json()
-          }).then((data) => {
-            if(!data.yass === "yass") alert("Something went wrong when trying to post")
-          }).catch((err) => {
-            alert("Something went wrong when trying to post")
+    }
+    const req = function(type, post) {
+      if (type === "post") {
+        fetch("https://gulpverse.herokuapp.com/api/post", {
+          method: "post",
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            content: document.getElementById("lol").value,
+            user: "<%= user %>"
           })
-        } else if(type === "yeah") {
-          fetch("https://gulpverse.herokuapp.com/api/yeah", {
-            method: "post",
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              user: "<%= user %>",
-              id: post
-            })
-          }).then((response) => {
-            return response.json()
-          }).then((data) => {
-            if(!data.yass === "yass") alert("Something went wrong when trying to post")
-          }).catch((err) => {
-            alert("Something went wrong when trying to post")
+        }).then((response) => {
+          return response.json()
+        }).then((data) => {
+          if (!data.yass === "yass") alert("Something went wrong when trying to post")
+        }).catch((err) => {
+          alert("Something went wrong when trying to post")
+        })
+      } else if (type === "yeah") {
+        fetch("https://gulpverse.herokuapp.com/api/yeah", {
+          method: "post",
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            user: "<%= user %>",
+            id: post
           })
-        }
+        }).then((response) => {
+          return response.json()
+        }).then((data) => {
+          if (!data.yass === "yass") alert("Something went wrong when trying to post")
+        }).catch((err) => {
+          alert("Something went wrong when trying to post")
+        })
       }
-      const socket = io()
-      socket.on("post", (yass) => {
-        const posty = document.createElement("div")
-        document.getElementById("fu").appendChild(posty)
-        posty.style.opacity = 0
-        posty.style.transition = "opacity 1s"
-        posty.innerHTML = `    <div style="box-shadow: 0 0px 5px rgb(0 0 0 / 50%);background-color:white;border-radius:10px;position:relative;width:70%;" id="haha-2">
+    }
+    const socket = io()
+    socket.on("post", (yass) => {
+      const posty = document.createElement("div")
+      document.getElementById("fu").appendChild(posty)
+      posty.style.opacity = 0
+      posty.style.transition = "opacity 1s"
+      posty.innerHTML = `    <div style="box-shadow: 0 0px 5px rgb(0 0 0 / 50%);background-color:white;border-radius:10px;position:relative;width:70%;" id="haha-2">
         <div style="background-color:transparent;width:100%;height:3em;padding-top:1em;border-radius:15px;">
           <div style="float:left;position:relative;left:1em;display:flex;gap:10px;">
             <img src="https://cdn.picrew.me/app/image_maker/1388625/icon_8v9i99lsyve3qQWO.jpg" style="width:3.2em;height:3em;border-radius:5px;box-shadow: 0 5px 5px rgb(0 0 0 / 80%);">
@@ -139,27 +149,30 @@
         <div style="height:1em;"></div>
         </div>
       </div><br/><br/>`
-        setTimeout(() => { posty.style.opacity = 1 }, 500)
-      })
-      socket.on("yeah", (yass) => {
-        let lolz = document.getElementById(`${yass.id}_yeah`)
-        console.log(`${yass.id}_yeah`)
-        lolz.innerHTML = `${yass.newz} Yeahs`
-      })
-      let drop = false
-      const dropdown = function() {
-        const dropz = document.getElementById("drop")
-        const droptext = document.getElementById("droptext")
-        if(drop === false) {
-          //droptext.style["display"] = "none"
-          dropz.style["height"] = "3em"
-          drop = true
-        } else if(drop === true) {
-          //droptext.style["display"] = "block"
-          dropz.style["height"] = "13em"
-          drop = false
-        }
+      setTimeout(() => {
+        posty.style.opacity = 1
+      }, 500)
+    })
+    socket.on("yeah", (yass) => {
+      let lolz = document.getElementById(`${yass.id}_yeah`)
+      console.log(`${yass.id}_yeah`)
+      lolz.innerHTML = `${yass.newz} Yeahs`
+    })
+    let drop = false
+    const dropdown = function() {
+      const dropz = document.getElementById("drop")
+      const droptext = document.getElementById("droptext")
+      if (drop === false) {
+        //droptext.style["display"] = "none"
+        dropz.style["height"] = "3em"
+        drop = true
+      } else if (drop === true) {
+        //droptext.style["display"] = "block"
+        dropz.style["height"] = "13em"
+        drop = false
       }
-    </script>
-  </body>
+    }
+  </script>
+</body>
+
 </html>
