@@ -178,7 +178,7 @@ app.post('/api/post', (req, res) => {
 app.post('/api/community/create', (req, res) => {
   if(req.body.name && req.body.icon) {
     if(communities.get(req.body.name)) {
-      res.render('pagse/error', {error:"A community with that name already exists!"})
+      res.render('pages/error', {error:"A community with that name already exists!"})
     } else {
            
     }
