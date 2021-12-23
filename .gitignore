@@ -6,3 +6,4 @@ enmap.sqlite
 enmap.sqlite-shm
 enmap.sqlite-wal
 data
+push.bat

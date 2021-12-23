@@ -217,5 +217,5 @@ app.post("/api/yeah", (req, res) => {
 io.on("connection", (socket) => {
 })
 
-http.listen(8000)
+http.listen(process.env.PORT || 3000)
 console.log('Server Started!')
