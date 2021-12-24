@@ -137,25 +137,6 @@ app.post('/api/register', (req, res) => {
     }
   }
 })
-app.post('/api/post', (req, res) => {
-  if (req.body.user && req.body.content) {
-    posts.set("_" + posts.autonum, {
-      poster: req.body.user,
-      content: xss(req.body.content),
-      time: new Date(),
-      stamp: false,
-      yeah: 0,
-      replies: []
-    });
-    io.sockets.emit("post", {
-      poster: req.body.user,
-      content: xss(req.body.content)
-    })
-    res.json({ yass: "yass" })
-  } else {
-    res.send('no bye')
-  }
-})
 app.post('/api/community/create', (req, res) => {
   if (req.body.name && req.body.icon) {
     if (communities.get(req.body.name)) {
