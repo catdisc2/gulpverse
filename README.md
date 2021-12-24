@@ -1,4 +1,2 @@
-# Gulpverse
-A miiverse clone i guess.
-# Installation
-Soon(?)
+# WOW
+# I FINALLY USED A DAMN LINTER

@@ -1,33 +1,23 @@
 {
-  "name": "hello-node",
+  "name": "gulpverse",
   "version": "0.0.1",
-  "description": "A simple Node app built on fastify, instantly up and running.",
-  "main": "server.js",
+  "description": "fuck",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node index.js"
   },
   "dependencies": {
-    "express": "^4.17.1",
+    "bcrypt": "^5.0.1",
     "ejs": "^3.1.6",
     "enmap": "^5.8.7",
-    "socket.io": "^4.4.0",
-    "xss": "^1.0.10",
-    "cookie-parser": "^1.4.6",
+    "express": "^4.17.1",
     "express-session": "^1.17.2",
-    "bcrypt": "^5.0.1",
     "session-file-store": "^1.5.0",
-    "express-rate-limit": "^5.5.1"
-  },
-  "engines": {
-    "node": "12.x"
+    "socket.io": "^4.4.0",
+    "xss": "^1.0.10"
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/glitch-hello-node"
+    "url": "https://github.com/catdisc2/gulpverse"
   },
-  "license": "MIT",
-  "keywords": [
-    "node",
-    "glitch",
-    "express"
-  ]
+  "license": "MIT"
 }

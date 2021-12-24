@@ -1,6 +1,13 @@
-const express = require('express');
+const express = require('express')
 const app = express()
-const enmap = require('enmap');
+const fs = require('fs')
+const enmap = require('enmap')
+const xss = require('xss')
+const http = require('http').createServer(app)
+const io = require('socket.io')(http)
+const session = require('express-session')
+const bcrypt = require('bcrypt')
+const FileStore = require('session-file-store')(session)
 const posts = new enmap({
   name: "posts",
   fetchAll: true
@@ -13,55 +20,74 @@ const communities = new enmap({
   name: "community",
   fetchAll: true
 })
-const xss = require('xss')
-const http = require('http').createServer(app);
-const io = require('socket.io')(http)
-const session = require("express-session")
-const bcrypt = require("bcrypt")
-const FileStore = require('session-file-store')(session)
+
 app.set('trust proxy', 1)
 app.use(session({
   store: new FileStore({
     path: "./.data/sessions"
   }),
-  secret: process.env.lol,
+  secret: require('./.data/config.json').session.secret || 'JustDance2021',
   resave: false,
   saveUninitialized: true,
   cookie: { secure: true }
 }))
 app.set('view engine', 'ejs')
 app.use(express.json())
-/**
-for (let elem of posts.fetchEverything().entries()) {
-    if(elem[1].content.includes("Raided by") || elem[1].content.includes("world is mine")) posts.delete(elem[0])
-}
-**/
 app.use(express.urlencoded({ extended: true }))
 
-fs.readdirSync('./routes/api').forEach(file => {
-  console.log(file)
-})
+const load = () => {
+  if(!require('./.data/config.json')) {
+    console.log('There is no config, so I\'ll create one for you.')
 
-app.get('/', (req, res) => {
-  res.render('pages/index');
-})
-app.get('/activity', (req, res) => {
-  let yser;
-  if (req.session.user) { yser = req.session.user } else { yser = "Guest" }
-  res.render('pages/activity', { posts: posts.fetchEverything(), user: yser })
-})
+    fs.writeFileSync('./.data/config.json', JSON.stringify({
+      port: 3000,
+      session: {
+          secret: 'JustDance2021'
+      }
+    }))
+    console.log('Config file created')
+  }
+
+  fs.readdirSync('./routes/api').forEach(file => {
+    let thang = require(`./routes/api/${file}`)
+    let db = {
+      posts: posts,
+      accounts: accounts,
+      communities: communities
+    }
+    app[thang.type](thang.route, (req, res) => thang.code(req, res, db, io))
+    console.log(`Loaded route from ${file}`)
+  })
+
+  fs.readdirSync('./routes/web').forEach(file => {
+    let thang = require(`./routes/web/${file}`)
+    let db = {
+      posts: posts,
+      accounts: accounts,
+      communities: communities
+    }
+    app[thang.type](thang.route, (req, res) => thang.code(req, res, db, io))
+    console.log(`Loaded route from ${file}`)
+  })
+  
+  console.log('Routes loaded')
+
+  http.listen(require('./.data/config.json').port || 3000)
+
+  console.log('Server started')
+}
+
+load()
+
 app.get('/posts/:id', (req, res) => {
   if (!posts.get(req.params.id)) {
     res.render('pages/error', { error: "That post doesn't exist!" })
   } else {
-    let lol = posts.get(req.params.id)
+    let lol = posts.get(req.params.id)  
     lol.key = req.params.id
     if (req.session.user) { lol.user = req.session.user } else { lol.user = "Guest" }
     res.render('pages/post', lol)
   }
-})
-app.get('/community', (req, res) => {
-  res.render('pages/communities', { comm: communities.array() })
 })
 app.get('/community/:id', (req, res) => {
   if (communities.get(req.params.id)) {
@@ -217,9 +243,3 @@ app.post("/api/yeah", (req, res) => {
     res.send("no bye")
   }
 })
-
-io.on("connection", (socket) => {
-})
-
-http.listen(process.env.PORT || 3000)
-console.log('Server Started!')
