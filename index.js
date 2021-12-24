@@ -79,55 +79,6 @@ const load = () => {
 
 load()
 
-app.get('/posts/:id', (req, res) => {
-  if (!posts.get(req.params.id)) {
-    res.render('pages/error', { error: "That post doesn't exist!" })
-  } else {
-    let lol = posts.get(req.params.id)  
-    lol.key = req.params.id
-    if (req.session.user) { lol.user = req.session.user } else { lol.user = "Guest" }
-    res.render('pages/post', lol)
-  }
-})
-app.get('/community/:id', (req, res) => {
-  if (communities.get(req.params.id)) {
-    let zz = communities.get(req.oarans.id)
-    zz.name = req.params.id
-    res.render('pages/cact', zz)
-  }
-})
-app.get('/account', (req, res) => {
-  let details;
-  if (req.session.user && req.session.pass) {
-    details = accounts.get(req.session.user)
-    details.username = req.session.user
-    details.own = true
-  }
-  res.render('pages/account', details)
-})
-app.get('/register', (req, res) => {
-  let details;
-  if (req.session.user && req.session.pass) {
-    details = {
-      login: true
-    }
-  } else {
-    details = {
-      login: false
-    }
-  }
-  res.render('pages/register', details)
-})
-app.get('/users/:user', (req, res) => {
-  if (!accounts.get(req.params.user)) {
-    res.render('pages/error', { error: "That user doesn't exist!" })
-  } else {
-    const user = accounts.get(req.params.user)
-    user.username = req.params.user
-    if (req.params.user !== req.session.user) user.own = false
-    res.render('pages/account', user)
-  }
-})
 app.post('/api/login', (req, res) => {
   if (!req.session.user || !req.session.pass) {
     if (!req.body.user || !req.body.pass) {
